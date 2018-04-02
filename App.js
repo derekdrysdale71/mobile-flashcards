@@ -6,7 +6,11 @@ import { Provider } from 'react-redux'
 import { Constants } from 'expo'
 import reducer from './reducers'
 import DeckList from './components/DeckList'
-import { gray } from './utils/colors'
+import AddDeck from './components/AddDeck'
+import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
+import { gray, white, purple } from './utils/colors'
 
 function MyStatusBar({ backgroundColor, ...props }) {
   return (
@@ -16,13 +20,40 @@ function MyStatusBar({ backgroundColor, ...props }) {
   )
 }
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: DeckList
+  },
+  AddDeck: {
+    screen: AddDeck
+  },
+  DeckDetail: {
+    screen: DeckDetail
+  },
+  AddCard: {
+    screen: AddCard
+  },
+  Quiz: {
+    screen: Quiz
+  }
+},
+  {
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+        height: 30
+      }
+    }
+  })
+
 export default class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <MyStatusBar backgroundColor={gray} barStyle="light-content" />
-          <DeckList />
+          <MainNavigator />
         </View>
       </Provider>
     )
