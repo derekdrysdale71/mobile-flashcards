@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, Button, StatusBar } from 'react-native'
 import { StackNavigator, } from 'react-navigation';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { Constants } from 'expo'
 import reducer from './reducers'
+import { Entypo } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import AddButton from './components/AddButton'
 import { gray, white, purple } from './utils/colors'
+import { YellowBox } from 'react-native'
 
-function MyStatusBar({ backgroundColor, ...props }) {
+function AppStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -22,7 +25,7 @@ function MyStatusBar({ backgroundColor, ...props }) {
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: DeckList
+    screen: DeckList,
   },
   AddDeck: {
     screen: AddDeck
@@ -42,17 +45,22 @@ const MainNavigator = StackNavigator({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
-        height: 30
+        height: 20
       }
     }
   })
 
 export default class App extends Component {
   render() {
+    YellowBox.ignoreWarnings([
+      'Warning: componentWillMount is deprecated',
+      'Warning: componentWillReceiveProps is deprecated',
+      'Warning: componentWillUpdate is deprecated'
+    ]);
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
-          <MyStatusBar backgroundColor={gray} barStyle="light-content" />
+          <AppStatusBar backgroundColor={gray} barStyle="light-content" />
           <MainNavigator />
         </View>
       </Provider>

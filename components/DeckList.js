@@ -6,11 +6,26 @@ import { getDecks } from '../actions'
 import { AppLoading } from 'expo'
 import { blue, gray, white } from '../utils/colors'
 import Deck from './Deck'
+import AddButton from './AddButton'
 
 class DeckList extends Component {
   state = {
     ready: false
   }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Decks',
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate('AddDeck')}>
+        <Text>Add</Text>
+      </TouchableOpacity>
+    )
+  })
+
+  // static navigationOptions = {
+  //   header: ({ navigation }) => ({
+  //     right: <AddButton />
+  //   })
+  // }
 
   componentDidMount() {
     console.log("ComponentDidMount")
@@ -20,7 +35,11 @@ class DeckList extends Component {
   }
 
   renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.deck}>
+    <TouchableOpacity
+      style={styles.deck}
+      key={item.title}
+      onPress={() => this.props.navigation.navigate('DeckDetail', { deck: item })}
+    >
       <Deck title={item.title} questions={item.questions} />
     </TouchableOpacity>
   )
