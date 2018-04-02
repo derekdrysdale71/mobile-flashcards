@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK } from './types'
+import { GET_DECKS, ADD_DECK, ADD_CARD } from './types'
 
 export const getDecks = decks => ({
   type: GET_DECKS,
@@ -8,4 +8,10 @@ export const getDecks = decks => ({
 export const addDeck = deck => ({
   type: ADD_DECK,
   deck
+})
+
+export const addCard = (deck, card) => ({
+  type: ADD_CARD,
+  deck,
+  card
 })

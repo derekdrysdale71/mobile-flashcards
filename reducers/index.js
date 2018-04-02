@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK } from '../actions/types'
+import { GET_DECKS, ADD_DECK, ADD_CARD } from '../actions/types'
 
 export default (state = {}, action) => {
   console.log('Action:', action)
@@ -12,6 +12,14 @@ export default (state = {}, action) => {
       return {
         ...state,
         ...deck
+      }
+    case ADD_CARD:
+      return {
+        ...state,
+        [action.deck]: {
+          title: action.deck,
+          questions: [...state[action.deck].questions, card]
+        }
       }
     default:
       return state
