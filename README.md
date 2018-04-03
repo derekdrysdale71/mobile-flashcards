@@ -2,7 +2,7 @@
 ## Project 3: Mobile Flashcards
 
 Mobile-Flashcards is the third project in the [React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019)
-It allows users to add flashcard sets called decks.  It also allows you to add cards to a deck.  These cards contain a question and answer.  You are then able to quiz yourself.  
+It allows users to add flashcard sets called decks.  It also allows you to add cards to a deck.  These cards contain a question and answer.  You are then able to quiz yourself on these cards.  Notifications can be enabled to remind you study each day.
 
 The project utilizes the following:
 - redux and react-redux for state management
