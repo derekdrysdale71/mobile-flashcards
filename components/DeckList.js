@@ -29,6 +29,7 @@ class DeckList extends Component {
 
   componentDidMount() {
     console.log("ComponentDidMount")
+    console.log('Params:', this.props.navigation.state.params)
     fetchDecks()
       .then((decks) => this.props.getAllDecks(decks))
       .then(() => this.setState(() => ({ ready: true })))
@@ -38,7 +39,7 @@ class DeckList extends Component {
     <TouchableOpacity
       style={styles.deck}
       key={item.title}
-      onPress={() => this.props.navigation.navigate('DeckDetail', { deck: item })}
+      onPress={() => this.props.navigation.navigate('DeckDetail', { title: item.title })}
     >
       <Deck title={item.title} questions={item.questions} />
     </TouchableOpacity>
@@ -46,10 +47,7 @@ class DeckList extends Component {
   render() {
     const { decks } = this.props;
     const { ready } = this.state;
-    const decksArray = Object.keys(decks).map(key => {
-      return decks[key]
-    })
-    console.log('Decks Array:', decksArray)
+
     if (ready === false) {
       return <AppLoading />
     }
@@ -57,9 +55,9 @@ class DeckList extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={decksArray}
+          data={decks.sort((a, b) => a.title > b.title)}
           renderItem={this.renderItem}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     )
@@ -67,7 +65,7 @@ class DeckList extends Component {
 }
 
 const mapStateToProps = decks => ({
-  decks
+  decks: Object.keys(decks).map(deck => (decks[deck]))
 })
 
 const mapDispatchToProps = dispatch => ({

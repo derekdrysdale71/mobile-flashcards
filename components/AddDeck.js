@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
 import { white, gray, blue, purple } from '../utils/colors'
@@ -18,16 +20,31 @@ class AddDeck extends Component {
   state = {
     title: ''
   }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Add Deck'
+  })
+
   onSubmit = () => {
     const { title } = this.state
     // Save to AsyncStorage and update store
     saveDeckTitle(title)
-      .then(deck => this.props.addDeck({
+      .then(() => this.props.addNewDeck({
         [title]: { title: title, questions: [] }
       }))
+      .catch(error => console.log(error))
       .then(() => this.setState(() => ({ title: '' })))
-    // Redirect to DeckDetail
-    this.props.navigation.navigate('DeckDetail')
+      .then(() => this.onNavigate(title))
+  }
+
+  onNavigate = title => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' }),
+        NavigationActions.navigate({ routeName: 'DeckDetail', params: { title: title } })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
   render() {
     const { title } = this.state
@@ -95,4 +112,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddDeck
+const mapDispatchToProps = dispatch => ({
+  addNewDeck: deck => dispatch(addDeck(deck))
+})
+
+export default connect(null, mapDispatchToProps)(AddDeck)

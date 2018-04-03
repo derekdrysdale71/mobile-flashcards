@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native'
+import { connect } from 'react-redux'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Alert } from 'react-native'
+import { addCardToDeck } from '../utils/api'
+import { addCard } from '../actions'
 import { white, gray, blue, purple } from '../utils/colors'
 
 function SubmitBtn({ onPress }) {
@@ -18,10 +21,27 @@ class AddCard extends Component {
     answer: ''
   }
   static navigationOptions = ({ navigation }) => ({
-    title: `Add Card to ${navigation.state.params.deck.title}`
+    title: `Add Card to ${navigation.state.params.title}`
   })
   onSubmit = () => {
-
+    const { title } = this.props.navigation.state.params
+    console.log('onSubmit title:', title)
+    const { question, answer } = this.state
+    if (question === '' || answer === '') {
+      return Alert.alert('Incomplete', 'Please supply a question and answer')
+    }
+    const card = { question: question, answer: answer }
+    console.log('New Card:', card)
+    // Save to AsyncStorage and update store
+    addCardToDeck(title, card)
+      .then(() => this.props.add(title, card))
+      .then(() => this.setState(() => ({
+        question: '',
+        answer: ''
+      }))).catch(error => console.log(error))
+    // Redirect to DeckDetail
+    //this.props.navigation.navigate('DeckDetail', { title: deck.title })
+    Alert.alert('Success!', 'Card added to deck')
   }
   render() {
     const { question, answer } = this.state
@@ -93,4 +113,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddCard
+const mapStateToProps = decks => ({
+  decks: Object.keys(decks).map(deck => (decks[deck]))
+})
+
+const mapDispatchToProps = dispatch => ({
+  add: (deck, card) => dispatch(addCard(deck, card))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard)

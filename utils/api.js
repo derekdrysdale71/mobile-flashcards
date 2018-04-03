@@ -6,9 +6,10 @@ export const fetchDecks = () => {
     .then(formatResults)
 }
 
-export const fetchDeck = (title) => {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY, key)
-    .then()
+export const fetchDeck = title => {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(decks => decks[title])
+    .catch(error => console.log(error))
 }
 
 export const saveDeckTitle = title => {
@@ -18,7 +19,18 @@ export const saveDeckTitle = title => {
 }
 
 export const addCardToDeck = (title, card) => {
-  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-    [key]: deck
-  }))
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(response => {
+      const data = JSON.parse(response)
+      const questions = data[title]["questions"]
+      questions.push(card)
+      return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [title]: {
+          title: title,
+          questions: questions
+        }
+      }))
+    })
+    .then(data => console.log('Data:', data))
+    .catch(error => console.log('Error:', error))
 }

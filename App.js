@@ -50,6 +50,11 @@ const MainNavigator = StackNavigator({
     }
   })
 
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 export default class App extends Component {
   render() {
     YellowBox.ignoreWarnings([
@@ -58,7 +63,7 @@ export default class App extends Component {
       'Warning: componentWillUpdate is deprecated'
     ]);
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{ flex: 1 }}>
           <AppStatusBar backgroundColor={gray} barStyle="light-content" />
           <MainNavigator />
