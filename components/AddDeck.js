@@ -45,7 +45,7 @@ class AddDeck extends Component {
     const { title } = this.state
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <Text style={styles.text}>What is the title of your new Deck?</Text>
+        <Text style={styles.text}>What is the title of your new deck?</Text>
         <TextInput style={styles.input}
           placeholder="Title"
           value={title}
