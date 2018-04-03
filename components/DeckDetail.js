@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { white, gray, purple } from '../utils/colors'
 
 class DeckDetail extends Component {
   state = {
     deckTitle: '',
-    isQuizEnabled: false
+    isQuizDisabled: false
   }
 
   onAddCard = () => {
 
   }
   onStartQuiz = () => {
-
+    const { deck } = this.props
+    if (!deck.questions.length) {
+      return Alert.alert('The deck has no cards!', 'Please add cards to this deck')
+    }
+    this.props.navigation.navigate('Quiz', { title: deck.title })
   }
 
   render() {
-    console.log('Props:', this.props)
     const { deck } = this.props
-    console.log('Deck Inside Details', deck)
     return (
       <View style={styles.container}>
         <View>
@@ -35,7 +37,7 @@ class DeckDetail extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.quizButton}
-            onPress={() => this.props.navigation.navigate('Quiz', { title: deck.title })}
+            onPress={this.onStartQuiz}
           >
             <Text style={{ color: white, textAlign: 'center', fontSize: 20 }}>Start Quiz</Text>
           </TouchableOpacity>
