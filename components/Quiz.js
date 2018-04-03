@@ -13,17 +13,26 @@ class Quiz extends Component {
     correctCount: 0
   }
 
+  // Should probably break these out into individual components
   renderQuiz() {
+    const { index, showAnswer } = this.state
+    const { questions } = this.props.deck
     return (
       <View style={styles.container}>
-        <Text>renderQuiz</Text>
+        <Text>Card {index + 1} / {questions.length}</Text>
+        {!showAnswer ? this.renderQuestion() : this.renderAnswer()}
       </View>
     )
   }
 
   renderQuestion() {
+    const { index } = this.setState
+    const { questions } = this.props.deck
     return (
       <View style={styles.container}>
+        <View>
+          <Text>{questions.question}</Text>
+        </View>
         <Text>renderQuestion</Text>
       </View>
     )
