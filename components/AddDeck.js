@@ -17,7 +17,8 @@ class AddDeck extends Component {
   }
 
   onSubmit = () => {
-    const { title } = this.state
+    let { title } = this.state
+    title = title.trim()
     if (title === '') {
       return Alert.alert('Incomplete', 'Please supply a title for your deck')
     }

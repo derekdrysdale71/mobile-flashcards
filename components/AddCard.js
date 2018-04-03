@@ -18,7 +18,10 @@ class AddCard extends Component {
 
   onSubmit = () => {
     const { title } = this.props.navigation.state.params
-    const { question, answer } = this.state
+    let { question, answer } = this.state
+    question = question.trim()
+    answer = answer.trim()
+
     if (question === '' || answer === '') {
       return Alert.alert('Incomplete', 'Please supply a question and answer')
     }
