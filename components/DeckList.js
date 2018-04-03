@@ -12,12 +12,22 @@ class DeckList extends Component {
   state = {
     ready: false
   }
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: 'Decks',
+  //   headerRight: (
+  //     <TouchableOpacity onPress={() => navigation.navigate('AddDeck')}>
+  //       <Text>Add</Text>
+  //     </TouchableOpacity>
+  //   )
+  // })
+
   static navigationOptions = ({ navigation }) => ({
     title: 'Decks',
     headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate('AddDeck')}>
-        <Text>Add</Text>
-      </TouchableOpacity>
+      <AddButton
+        style={styles.addButton}
+        onPress={() => navigation.navigate('AddDeck')}
+      />
     )
   })
 
@@ -84,6 +94,9 @@ const styles = StyleSheet.create({
     borderColor: gray,
     borderRadius: 8,
     marginBottom: 10
+  },
+  addButton: {
+    margin: 10
   }
 })
 

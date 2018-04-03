@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { gray, purple } from '../utils/colors'
+import { white, gray, purple } from '../utils/colors'
 
 class DeckDetail extends Component {
   // static navigationOptions = ({ navigation }) => ({
@@ -29,18 +29,21 @@ class DeckDetail extends Component {
           <Text style={styles.title}>{deck.title}</Text>
           <Text style={styles.cardCount}>{deck.questions.length > 0 ? deck.questions.length : 0} card(s)</Text>
         </View>
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })}
-        >
-          <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.quizButton}
-          onPress={() => this.props.navigation.navigate('Quiz')}
-        >
-          <Text>Start Quiz</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })}
+          >
+            <Text style={{ color: 'black', textAlign: 'center', fontSize: 20 }}>Add Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.quizButton}
+            onPress={() => this.props.navigation.navigate('Quiz')}
+          >
+            <Text style={{ color: white, textAlign: 'center', fontSize: 20 }}>Start Quiz</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
     )
   }
@@ -54,38 +57,43 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   addButton: {
-    backgroundColor: purple,
-    alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
-    margin: 40,
+    borderColor: 'black',
+    width: 200,
     height: 50,
-    borderRadius: 10
+    borderRadius: 10,
+    borderWidth: 1,
+    marginBottom: 10
   },
   quizButton: {
-    backgroundColor: gray,
-    alignItems: 'center',
+    backgroundColor: 'black',
     justifyContent: 'center',
-    padding: 10,
-    margin: 40,
+    borderColor: 'black',
+    width: 200,
     height: 50,
-    borderRadius: 10
+    borderRadius: 10,
+    borderWidth: 1
   },
   title: {
     marginTop: 10,
     marginBottom: 5,
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: '600',
     textAlign: 'center'
   },
   cardCount: {
     marginTop: 5,
     marginBottom: 10,
-    fontSize: 20,
+    fontSize: 25,
     color: gray,
     fontWeight: '300',
     textAlign: 'center'
-  }
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 40,
+  },
 })
 
 const mapStateToProps = (state, { navigation }) => {

@@ -25,7 +25,7 @@ function AppStatusBar({ backgroundColor, ...props }) {
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: DeckList,
+    screen: DeckList
   },
   AddDeck: {
     screen: AddDeck
@@ -37,18 +37,26 @@ const MainNavigator = StackNavigator({
     screen: AddCard
   },
   Quiz: {
-    screen: Quiz
+    screen: Quiz,
   }
 },
   {
+    initialRouteName: 'Home',
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
-        height: 20
+      },
+      headerTitleStyle: {
+        flex: 1,
+        fontWeight: '500',
+        fontSize: 24,
+        marginTop: 5,
+        textAlign: 'center',
       }
     }
-  })
+  }
+)
 
 const store = createStore(
   reducer,
@@ -76,8 +84,5 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

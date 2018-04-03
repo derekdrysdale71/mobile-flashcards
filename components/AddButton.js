@@ -1,11 +1,12 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
+import { white } from '../utils/colors'
 
-export default AddButton = ({ navigate }) => (
+export default AddButton = ({ onPress }) => (
   <TouchableOpacity
-    onPress={navigate('AddDeck')}
+    onPress={onPress}
   >
-    <Entypo name='minus' size={30} color={purple} />
+    <Entypo name='plus' size={30} color={white} />
   </TouchableOpacity>
 )
