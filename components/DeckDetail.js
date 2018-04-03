@@ -4,9 +4,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { white, gray, purple } from '../utils/colors'
 
 class DeckDetail extends Component {
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: navigation.state.params.title
-  // })
   state = {
     deckTitle: '',
     isQuizEnabled: false
@@ -27,7 +24,7 @@ class DeckDetail extends Component {
       <View style={styles.container}>
         <View>
           <Text style={styles.title}>{deck.title}</Text>
-          <Text style={styles.cardCount}>{deck.questions.length > 0 ? deck.questions.length : 0} card(s)</Text>
+          <Text style={styles.cardCount}>{deck.questions.length > 0 ? deck.questions.length : 0} cards</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -93,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingBottom: 40,
-  },
+  }
 })
 
 const mapStateToProps = (state, { navigation }) => {
