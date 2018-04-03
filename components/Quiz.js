@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity, Button, StyleSheet, Alert, Animated } from 'react-native'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 import { white } from '../utils/colors'
 
 class Quiz extends Component {
@@ -26,10 +27,17 @@ class Quiz extends Component {
     })
     index < questionCount - 1
       ? this.setState({ index: index + 1 })
-      : this.setState({
-        index: 0,
-        quizComplete: true
-      })
+      : this.onCompleteQuiz
+  }
+
+  onCompleteQuiz = () => {
+    this.setState({
+      index: 0,
+      quizComplete: true
+    })
+    // Clear Notification
+    clearLocalNotification()
+      .then(setLocalNotification);
   }
 
   onRestartQuiz = () => {
