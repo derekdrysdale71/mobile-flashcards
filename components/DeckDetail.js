@@ -38,7 +38,7 @@ class DeckDetail extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.quizButton}
-            onPress={() => this.props.navigation.navigate('Quiz')}
+            onPress={() => this.props.navigation.navigate('Quiz', { title: deck.title })}
           >
             <Text style={{ color: white, textAlign: 'center', fontSize: 20 }}>Start Quiz</Text>
           </TouchableOpacity>
@@ -103,9 +103,4 @@ const mapStateToProps = (state, { navigation }) => {
     deck: state[title]
   }
 }
-
-// const mapStateToProps = decks => ({
-//   deck: decks[this.props.navigation.state.params]
-// })
-
 export default connect(mapStateToProps)(DeckDetail)
