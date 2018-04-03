@@ -9,18 +9,6 @@ import Deck from './Deck'
 import AddButton from './AddButton'
 
 class DeckList extends Component {
-  state = {
-    ready: false
-  }
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: 'Decks',
-  //   headerRight: (
-  //     <TouchableOpacity onPress={() => navigation.navigate('AddDeck')}>
-  //       <Text>Add</Text>
-  //     </TouchableOpacity>
-  //   )
-  // })
-
   static navigationOptions = ({ navigation }) => ({
     title: 'Decks',
     headerRight: (
@@ -31,15 +19,11 @@ class DeckList extends Component {
     )
   })
 
-  // static navigationOptions = {
-  //   header: ({ navigation }) => ({
-  //     right: <AddButton />
-  //   })
-  // }
+  state = {
+    ready: false
+  }
 
   componentDidMount() {
-    console.log("ComponentDidMount")
-    console.log('Params:', this.props.navigation.state.params)
     fetchDecks()
       .then((decks) => this.props.getAllDecks(decks))
       .then(() => this.setState(() => ({ ready: true })))

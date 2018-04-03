@@ -7,6 +7,6 @@ export default AddButton = ({ onPress }) => (
   <TouchableOpacity
     onPress={onPress}
   >
-    <Entypo name='plus' size={30} color={white} />
+    <Entypo name='plus' size={35} color={white} />
   </TouchableOpacity>
 )

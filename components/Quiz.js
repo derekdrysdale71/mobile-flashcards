@@ -77,7 +77,6 @@ class Quiz extends Component {
   renderQuestion() {
     const { index } = this.state
     const { questions } = this.props
-    console.log('Index:', index)
     const question = questions[index]['question']
     return (
       <Animated.View style={styles.container}>

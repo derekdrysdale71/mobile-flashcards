@@ -8,12 +8,13 @@ import SubmitButton from './SubmitButton'
 import { white, gray, blue, purple } from '../utils/colors'
 
 class AddDeck extends Component {
-  state = {
-    title: ''
-  }
   static navigationOptions = ({ navigation }) => ({
     title: 'Add Deck'
   })
+
+  state = {
+    title: ''
+  }
 
   onSubmit = () => {
     const { title } = this.state
@@ -62,13 +63,6 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     padding: 20
   },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
-  },
   text: {
     color: blue,
     fontSize: 16,
@@ -78,7 +72,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: gray,
     borderWidth: 1,
-    paddingLeft: 10
+    paddingLeft: 10,
+    marginBottom: 10
   }
 })
 

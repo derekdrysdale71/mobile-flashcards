@@ -10,8 +10,10 @@ class DeckDetail extends Component {
   }
 
   onAddCard = () => {
-
+    const { deck } = this.props
+    this.props.navigation.navigate('AddCard', { title: deck.title })
   }
+
   onStartQuiz = () => {
     const { deck } = this.props
     if (!deck.questions.length) {
@@ -31,7 +33,7 @@ class DeckDetail extends Component {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.addButton}
-            onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })}
+            onPress={this.onAddCard}
           >
             <Text style={{ color: 'black', textAlign: 'center', fontSize: 20 }}>Add Card</Text>
           </TouchableOpacity>

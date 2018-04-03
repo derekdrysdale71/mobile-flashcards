@@ -31,6 +31,5 @@ export const addCardToDeck = (title, card) => {
         }
       }))
     })
-    .then(data => console.log('Data:', data))
     .catch(error => console.log('Error:', error))
 }
