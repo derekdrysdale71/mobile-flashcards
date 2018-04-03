@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Alert } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
@@ -26,6 +26,9 @@ class AddDeck extends Component {
 
   onSubmit = () => {
     const { title } = this.state
+    if (title === '') {
+      return Alert.alert('Incomplete', 'Please supply a title for your deck')
+    }
     // Save to AsyncStorage and update store
     saveDeckTitle(title)
       .then(() => this.props.addNewDeck({
