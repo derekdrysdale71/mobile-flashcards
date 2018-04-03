@@ -27,7 +27,7 @@ class Quiz extends Component {
     })
     index < questionCount - 1
       ? this.setState({ index: index + 1 })
-      : this.onCompleteQuiz
+      : this.onCompleteQuiz()
   }
 
   onCompleteQuiz = () => {
