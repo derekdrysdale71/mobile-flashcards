@@ -13,6 +13,7 @@ import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
 import AddButton from './components/AddButton'
 import { gray, white, purple } from './utils/colors'
+import { setLocalNotification } from 
 import { YellowBox } from 'react-native'
 
 function AppStatusBar({ backgroundColor, ...props }) {
@@ -64,6 +65,9 @@ const store = createStore(
 );
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     YellowBox.ignoreWarnings([
       'Warning: componentWillMount is deprecated',
