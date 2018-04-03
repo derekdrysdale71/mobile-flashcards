@@ -4,17 +4,8 @@ import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingVi
 import { NavigationActions } from 'react-navigation'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
+import SubmitButton from './SubmitButton'
 import { white, gray, blue, purple } from '../utils/colors'
-
-function SubmitBtn({ onPress }) {
-  return (
-    <TouchableOpacity
-      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-      onPress={onPress}>
-      <Text style={styles.submitBtnText}>SUBMIT</Text>
-    </TouchableOpacity>
-  )
-}
 
 class AddDeck extends Component {
   state = {
@@ -59,7 +50,7 @@ class AddDeck extends Component {
           value={title}
           onChangeText={(title) => this.setState({ title })}
         />
-        <SubmitBtn onPress={this.onSubmit} />
+        <SubmitButton onPress={this.onSubmit} />
       </KeyboardAvoidingView>
     )
   }
@@ -70,30 +61,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: white,
     padding: 20
-  },
-  iosSubmitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginLeft: 30,
-    marginRight: 30,
-  },
-  AndroidSubmitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-    height: 45,
-    borderRadius: 2,
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  submitBtnText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center',
   },
   center: {
     flex: 1,
