@@ -7,7 +7,7 @@ It allows users to add flashcard sets called decks.  It also allows you to add c
 The project utilizes the following:
 - redux and react-redux for state management
 - react-navigate for navigation
-- AsyncStorage for data persist
+- AsyncStorage for data persistence
 
 This project has only been tested on iOS.
 
