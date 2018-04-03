@@ -22,15 +22,27 @@ class Quiz extends Component {
   }
 
   renderQuestion() {
-
+    return (
+      <View style={styles.container}>
+        <Text>renderQuestion</Text>
+      </View>
+    )
   }
 
   renderAnswer() {
-
+    return (
+      <View style={styles.container}>
+        <Text>renderAnswer</Text>
+      </View>
+    )
   }
 
   renderScore() {
-
+    return (
+      <View style={styles.container}>
+        <Text>renderScore</Text>
+      </View>
+    )
   }
   render() {
     const { quizComplete } = this.state;
