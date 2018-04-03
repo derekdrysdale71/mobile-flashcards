@@ -13,7 +13,7 @@ import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
 import AddButton from './components/AddButton'
 import { gray, white, purple } from './utils/colors'
-import { setLocalNotification } from 
+import { setLocalNotification } from './utils/helpers'
 import { YellowBox } from 'react-native'
 
 function AppStatusBar({ backgroundColor, ...props }) {
